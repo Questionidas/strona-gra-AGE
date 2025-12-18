@@ -1,24 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   const tasksData = [
-    { id: 1, code: "1", answer: "Kotek" },
-    { id: 2, code: "2", answer: "Piesek" },
-    { id: 3, code: "3", answer: "Papuga" },
-    { id: 4, code: "4", answer: "Lew" },
-    { id: 5, code: "5", answer: "Tygrys" },
-    { id: 6, code: "6", answer: "Słoń" },
-    { id: 7, code: "7", answer: "Żyrafa" },
-    { id: 8, code: "8", answer: "Zebra" },
-    { id: 9, code: "9", answer: "Wilk" },
-    { id: 10, code: "0", answer: "Lis" }
+    { id: 1, code: "1234", points: 10 },
+    { id: 2, code: "2345", points: 20 },
+    { id: 3, code: "3456", points: 30 },
+    { id: 4, code: "4567", points: 40 },
+    { id: 5, code: "5678", points: 50 },
+    { id: 6, code: "6789", points: 60 },
+    { id: 7, code: "7890", points: 70 },
+    { id: 8, code: "8901", points: 80 },
+    { id: 9, code: "9012", points: 90 },
+    { id: 10, code: "0123", points: 100 }
   ];
 
   const tasksContainer = document.getElementById("tasks");
+  const scoreValue = document.getElementById("scoreValue");
 
-  if (!tasksContainer) {
-    console.error("❌ Nie znaleziono #tasks w HTML");
-    return;
+  function updateScore() {
+    let total = 0;
+    tasksData.forEach(task => {
+      const pts = localStorage.getItem(`task_${task.id}_points`);
+      if (pts) total += parseInt(pts);
+    });
+    scoreValue.textContent = total;
   }
+
+  updateScore();
 
   tasksData.forEach(task => {
     const isDone = localStorage.getItem(`task_${task.id}`) === "done";
@@ -27,10 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
     taskDiv.className = "task" + (isDone ? " done" : "");
 
     taskDiv.innerHTML = `
-      <h3>Zadanie ${task.id}</h3>
+      <h3>Zadanie ${task.id} (${task.points} pkt)</h3>
       <input type="text" placeholder="Wpisz kod" ${isDone ? "disabled" : ""}>
       <button ${isDone ? "disabled" : ""}>Sprawdź</button>
-      <div class="answer">${isDone ? "✅ " + task.answer : ""}</div>
+      <div class="answer">
+        ${isDone ? `✅ Zdobyto ${task.points} punktów` : ""}
+      </div>
     `;
 
     const input = taskDiv.querySelector("input");
@@ -40,10 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       if (input.value === task.code) {
         localStorage.setItem(`task_${task.id}`, "done");
+        localStorage.setItem(`task_${task.id}_points`, task.points);
+
         taskDiv.classList.add("done");
-        answerDiv.textContent = "✅ " + task.answer;
+        answerDiv.textContent = `🏆 Zdobywasz ${task.points} punktów!`;
+
         input.disabled = true;
         button.disabled = true;
+
+        updateScore();
       } else {
         answerDiv.textContent = "❌ Zły kod";
       }
@@ -53,4 +67,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
