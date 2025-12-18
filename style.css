@@ -75,6 +75,16 @@ input {
   box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
 
 }
+.score {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px solid #6b4a2d;
+  border-radius: 8px;
+}
 
 /* PRZYCISK */
 button {
