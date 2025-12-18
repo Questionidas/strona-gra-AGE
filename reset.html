@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Reset punktów</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="title">🏪 Kupiec Królestwa</h1>
+  <p class="subtitle">
+    Twoje złoto zostało wydane.<br>
+    Sakiewka jest teraz pusta.
+  </p>
+
+  <div class="score">
+    🪙 Punkty: <span id="scoreValue">0</span>
+  </div>
+
+  <p style="text-align:center; font-weight:bold;">
+    Możesz wrócić do dalszej gry.
+  </p>
+
+  <div style="text-align:center; margin-top:20px;">
+    <a href="index.html">
+      ⬅️ Powrót do gry
+    </a>
+  </div>
+</div>
+
+<script>
+  // ZEROWANIE PUNKTÓW
+  localStorage.setItem("totalPoints", "0");
+</script>
+
+</body>
+</html>
