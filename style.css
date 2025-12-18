@@ -85,6 +85,25 @@ input {
   border: 2px solid #6b4a2d;
   border-radius: 8px;
 }
+.reset-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#qrResetBtn {
+  padding: 12px 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  background: linear-gradient(#7a2e2e, #4a1515);
+  color: #ffe6c7;
+  border: 2px solid #2a0d0d;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#qrResetBtn:hover {
+  background: linear-gradient(#9a3a3a, #5a1d1d);
+}
 
 /* PRZYCISK */
 button {
