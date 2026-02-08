@@ -1,30 +1,413 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <meta charset="UTF-8">
-  <title>Gra terenowa</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
+/* FONTY */
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&display=swap');
 
-<div class="container">
-  <h1 class="title">Kroniki Królestwa</h1>
-  <p class="subtitle">Rozwiąż zadania i odkryj tajemnice</p>
-<div class="score-bar">
-  <span class="score-label">🏆 Punkty</span>
-  <span class="score-value" id="scoreValue">0</span>
-</div>
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #3a2f25, #1e1510);
+  font-family: 'Cinzel', serif;
+  color: #2b1b0f;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* GŁÓWNY KONTENER – PERGAMIN */
+.container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(#f5e6c8, #e8d4aa);
+  border: 10px solid #6b4a2d;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+/* TYTUŁ */
+.title {
+  text-align: center;
+  font-family: 'MedievalSharp', cursive;
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+/* ZADANIE */
+.task {
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid #8b5a2b;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.task:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.task.done {
+  background: linear-gradient(#d9f2d9, #bfe6bf);
+  border-color: #2f6b2f;
+}
+
+/* NAGŁÓWEK ZADANIA */
+.task h3 {
+  margin-top: 0;
+  font-family: 'MedievalSharp', cursive;
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #6b4a2d;
+  border-radius: 6px;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  background: #fff8e8;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+
+}
+.score {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 2px solid #6b4a2d;
+  border-radius: 8px;
+}
+.reset-section {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#qrResetBtn {
+  padding: 12px 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  background: linear-gradient(#7a2e2e, #4a1515);
+  color: #ffe6c7;
+  border: 2px solid #2a0d0d;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#qrResetBtn:hover {
+  background: linear-gradient(#9a3a3a, #5a1d1d);
+}
+
+/* PRZYCISK */
+button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  font-size: 1rem;
+  background: linear-gradient(#8b5a2b, #5a3a1b);
+  color: #fff2cc;
+  border: 2px solid #3a2412;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(#a66a34, #6b4320);
+}
+
+button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+/* ODPOWIEDŹ */
+.answer {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .container {
+    margin: 10px;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+}
+.qr-btn {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffe6c7;
+  background: linear-gradient(#3b5a2b, #243a1b);
+  border: 2px solid #1a2a12;
+  border-radius: 8px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: #000;
+  z-index: 9999;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* Zarezerwuj miejsce na pasek na dole */
+.overlay img {
+  width: 100%;
+  height: calc(100vh - 78px); /* 78px = wysokość paska z przyciskiem */
+  object-fit: contain;
+  display: block;
+}
+
+.overlay-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.back-btn {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffe6c7;
+  background: linear-gradient(#7a2e2e, #4a1515);
+  border: 2px solid #2a0d0d;
+  border-radius: 8px;
+}
+
+.back-btn:hover {
+  background: linear-gradient(#9a3a3a, #5a1d1d);
+}
+/* ===== KARTA ZADANIA ===== */
+
+.task {
+  background: linear-gradient(#f7ecd2, #e6d2a6);
+  border: 3px solid #6b4a2d;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.task.done {
+  background: linear-gradient(#d9f2d9, #bfe6bf);
+  border-color: #2f6b2f;
+}
+
+/* ===== HEADER Z IKONĄ ===== */
+
+.task-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.task-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #3a2412;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1f1208;
+
+  overflow: hidden; /* 🔑 KLUCZOWE */
+}
 
 
-  <div id="tasks"></div>
-</div>
-<div class="reset-section">
-  <button id="qrResetBtn">
-    🪙 Wydaj całe złoto (symulacja QR)
-  </button>
-</div>
+.task-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* 🔑 wypełnia koło */
+  border-radius: 50%;  /* 🔒 dodatkowe zabezpieczenie */
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+
+.task-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-number {
+  font-family: 'MedievalSharp', cursive;
+  font-size: 1.2rem;
+}
+
+.task-points {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+/* =========================
+   MOBILE FIRST (telefony)
+   ========================= */
+@media (max-width: 600px) {
+
+  /* usuń "czarne boki": tło i pełna szerokość */
+  body {
+    background: linear-gradient(#f5e6c8, #e8d4aa);
+    padding: 0;
+  }
+
+  .container {
+    max-width: none;
+    margin: 0;
+    padding: 14px;
+    border-radius: 0;
+    border-width: 6px;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+
+  /* większy tytuł i licznik - lepsza czytelność */
+  .title {
+    font-size: 2.0rem;
+    margin-top: 6px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  .score {
+    font-size: 1.25rem;
+    padding: 12px;
+    margin-bottom: 18px;
+  }
+
+  /* KARTY zadań: większe, żeby było 1–2 na ekran */
+  .task {
+    padding: 18px;
+    margin-bottom: 18px;
+    border-width: 3px;
+    border-radius: 16px;
+  }
+
+  .task-header {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  /* większa ikona - "aplikacyjny" look */
+  .task-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .task-number {
+    font-size: 1.35rem;
+  }
+
+  .task-points {
+    font-size: 1rem;
+  }
+
+  /* większe pola i przyciski (thumb-friendly) */
+  input {
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  button {
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .qr-btn {
+    font-size: 1.05rem;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .answer {
+    font-size: 1.05rem;
+    margin-top: 12px;
+  }
+
+  /* reset na dole: większy i bez odstających marginesów */
+  .reset-section {
+    margin-top: 20px;
+    padding: 0 14px 18px;
+  }
+
+  #qrResetBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 600px) {
+  html, body {
+    scroll-snap-type: none;
+  }
+
+  .task {
+    scroll-snap-align: none;
+  }
+}
+/* =========================
+   STICKY SCORE BAR (mobile)
+   ========================= */
+
+.score-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  margin-bottom: 16px;
+
+  background: linear-gradient(#3a2412, #1f1208);
+  color: #ffe6c7;
+
+  border-bottom: 3px solid #b08a57;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.score-label {
+  font-family: 'MedievalSharp', cursive;
+  font-size: 1.2rem;
+}
+
+.score-value {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
