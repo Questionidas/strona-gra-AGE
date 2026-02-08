@@ -146,3 +146,124 @@ button:disabled {
     font-size: 1.8rem;
   }
 }
+.qr-btn {
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffe6c7;
+  background: linear-gradient(#3b5a2b, #243a1b);
+  border: 2px solid #1a2a12;
+  border-radius: 8px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background: #000;
+  z-index: 9999;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* Zarezerwuj miejsce na pasek na dole */
+.overlay img {
+  width: 100%;
+  height: calc(100vh - 78px); /* 78px = wysokość paska z przyciskiem */
+  object-fit: contain;
+  display: block;
+}
+
+.overlay-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.back-btn {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  text-decoration: none;
+  color: #ffe6c7;
+  background: linear-gradient(#7a2e2e, #4a1515);
+  border: 2px solid #2a0d0d;
+  border-radius: 8px;
+}
+
+.back-btn:hover {
+  background: linear-gradient(#9a3a3a, #5a1d1d);
+}
+/* ===== KARTA ZADANIA ===== */
+
+.task {
+  background: linear-gradient(#f7ecd2, #e6d2a6);
+  border: 3px solid #6b4a2d;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.task.done {
+  background: linear-gradient(#d9f2d9, #bfe6bf);
+  border-color: #2f6b2f;
+}
+
+/* ===== HEADER Z IKONĄ ===== */
+
+.task-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.task-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #3a2412;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1f1208;
+
+  overflow: hidden; /* 🔑 KLUCZOWE */
+}
+
+
+.task-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* 🔑 wypełnia koło */
+  border-radius: 50%;  /* 🔒 dodatkowe zabezpieczenie */
+}
+
+
+.task-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.task-number {
+  font-family: 'MedievalSharp', cursive;
+  font-size: 1.2rem;
+}
+
+.task-points {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
