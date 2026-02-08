@@ -380,4 +380,39 @@ button:disabled {
   }
 }
 
+/* =========================
+   STICKY SCORE BAR (mobile)
+   ========================= */
+
+.score-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 16px;
+  margin-bottom: 16px;
+
+  background: linear-gradient(#3a2412, #1f1208);
+  color: #ffe6c7;
+
+  border-bottom: 3px solid #b08a57;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.score-label {
+  font-family: 'MedievalSharp', cursive;
+  font-size: 1.2rem;
+}
+
+.score-value {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+
+
 
