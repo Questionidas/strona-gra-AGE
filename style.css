@@ -267,3 +267,117 @@ button:disabled {
   font-size: 0.9rem;
   opacity: 0.8;
 }
+/* =========================
+   MOBILE FIRST (telefony)
+   ========================= */
+@media (max-width: 600px) {
+
+  /* usuń "czarne boki": tło i pełna szerokość */
+  body {
+    background: linear-gradient(#f5e6c8, #e8d4aa);
+    padding: 0;
+  }
+
+  .container {
+    max-width: none;
+    margin: 0;
+    padding: 14px;
+    border-radius: 0;
+    border-width: 6px;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+
+  /* większy tytuł i licznik - lepsza czytelność */
+  .title {
+    font-size: 2.0rem;
+    margin-top: 6px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 14px;
+  }
+
+  .score {
+    font-size: 1.25rem;
+    padding: 12px;
+    margin-bottom: 18px;
+  }
+
+  /* KARTY zadań: większe, żeby było 1–2 na ekran */
+  .task {
+    padding: 18px;
+    margin-bottom: 18px;
+    border-width: 3px;
+    border-radius: 16px;
+  }
+
+  .task-header {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  /* większa ikona - "aplikacyjny" look */
+  .task-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .task-number {
+    font-size: 1.35rem;
+  }
+
+  .task-points {
+    font-size: 1rem;
+  }
+
+  /* większe pola i przyciski (thumb-friendly) */
+  input {
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  button {
+    font-size: 1.1rem;
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .qr-btn {
+    font-size: 1.05rem;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .answer {
+    font-size: 1.05rem;
+    margin-top: 12px;
+  }
+
+  /* reset na dole: większy i bez odstających marginesów */
+  .reset-section {
+    margin-top: 20px;
+    padding: 0 14px 18px;
+  }
+
+  #qrResetBtn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    border-radius: 10px;
+  }
+}
+@media (max-width: 600px) {
+  html, body {
+    scroll-snap-type: y mandatory;
+  }
+
+  .task {
+    scroll-snap-align: start;
+  }
+}
+
+
