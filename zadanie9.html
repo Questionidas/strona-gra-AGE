@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zadanie 9</title>
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="title">Zadanie nr 9</h1>
+  <p class="subtitle">Ciekawostki o kwiatach:</p>
+
+  <ul id="facts" style="font-size:1.1rem;"></ul>
+
+  <a href="index.html" class="back-btn" style="margin-top:25px;">
+    ⬅️ WRÓĆ do strony głównej
+  </a>
+</div>
+
+<script>
+  const allFacts = [
+    "Słoneczniki potrafią obracać się za słońcem.",
+    "Tulipany były kiedyś droższe niż złoto.",
+    "Niektóre kwiaty kwitną tylko w nocy.",
+    "Róże występują naturalnie w niemal każdym kolorze oprócz niebieskiego.",
+    "Lawenda działa uspokajająco.",
+    "Największy kwiat świata może mieć ponad metr średnicy."
+  ];
+
+  const shuffled = allFacts.sort(() => 0.5 - Math.random());
+  const selected = shuffled.slice(0, 3);
+
+  const ul = document.getElementById("facts");
+  selected.forEach(fact => {
+    const li = document.createElement("li");
+    li.textContent = fact;
+    ul.appendChild(li);
+  });
+</script>
+
+</body>
+</html>

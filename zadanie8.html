@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zadanie 8</title>
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<div class="container">
+  <h1 class="title">Zadanie nr 8</h1>
+  <p class="subtitle">Losowa godzina:</p>
+
+  <p id="time" style="text-align:center; font-size:2rem; font-weight:bold;"></p>
+
+  <a href="index.html" class="back-btn" style="margin-top:25px;">
+    ⬅️ WRÓĆ do strony głównej
+  </a>
+</div>
+
+<script>
+  const h = String(Math.floor(Math.random() * 24)).padStart(2, '0');
+  const m = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+  document.getElementById("time").textContent = `${h}:${m}`;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zadanie 4</title>
+
+  <link rel="stylesheet" href="style.css?v=2">
+
+  <style>
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      border: 2px solid #6b4a2d;
+      object-fit: cover;
+    }
+
+    .back-section {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .back-btn {
+      display: block;
+      padding: 12px;
+      font-family: 'Cinzel', serif;
+      font-weight: bold;
+      text-decoration: none;
+      color: #ffe6c7;
+      background: linear-gradient(#7a2e2e, #4a1515);
+      border: 2px solid #2a0d0d;
+      border-radius: 8px;
+    }
+
+    .back-btn:hover {
+      background: linear-gradient(#9a3a3a, #5a1d1d);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1 class="title">Zadanie nr 4</h1>
+  <p class="subtitle">Z jakich pozycji widać te miejsca?</p>
+
+  <div class="gallery">
+    <img src="ogrod1.jpg" alt="Ogród 1">
+    <img src="ogrod2.jpg" alt="Ogród 2">
+    <img src="ogrod3.jpg" alt="Ogród 3">
+  </div>
+
+  <div class="back-section">
+    <a href="index.html" class="back-btn">
+      ⬅️ WRÓĆ do strony głównej
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
