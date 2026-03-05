@@ -110,7 +110,7 @@ function updateStability() {
  taskDiv.innerHTML = `
   <div class="task-header">
     <div class="task-icon">
-      <img src="task1.png" alt="Symbol zadania ${task.id}">
+      <img src="task${task.id}.png" alt="Symbol zadania ${task.id}">
     </div>
     <div class="task-title">
       <span class="task-number">Zadanie ${task.id}</span>
@@ -185,5 +185,6 @@ function updateStability() {
   }
  updateStability();
 });
+
 
 
