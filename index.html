@@ -9,23 +9,25 @@
 <body>
 
 <div class="container">
-  <h1 class="title">Kroniki Królestwa</h1>
-  <p class="subtitle">Rozwiąż zadania i odkryj tajemnice</p>
-<div class="score-bar">
-  <span class="score-label">🏆 Punkty</span>
-  <span class="score-value" id="scoreValue">0</span>
+  <h1 class="title">Misja Ratunkowa:</h1>
+  <h1 class="title">Ogród</h1>
+  <p class="subtitle">Rozwiąż zadania i uratuj Ogród przed zniszczeniem </p>
+<div class="stability-bar">
+  <div class="stability-top">
+    <span class="stability-label">⚡ Stabilizacja systemu</span>
+    <span class="stability-value"><span id="stabilityPercent">0</span>%</span>
+  </div>
+
+  <div class="stability-track">
+    <div class="stability-fill" id="stabilityFill" style="width: 0%"></div>
+  </div>
 </div>
+
 
   <div id="tasks"></div>
 </div>
-<div class="reset-section">
-  <button id="qrResetBtn">
-    🪙 Wydaj całe złoto (symulacja QR)
-  </button>
-</div>
+
 
 <script src="script.js"></script>
 </body>
 </html>
-
-
