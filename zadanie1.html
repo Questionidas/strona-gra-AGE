@@ -7,6 +7,52 @@
   <link rel="stylesheet" href="style.css?v=2">
   <style>
     /* Drobne style tylko dla tej podstrony */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: none;
+  z-index: 9999;
+}
+
+.overlay.active {
+  display: block;
+}
+
+/* obraz zostawia miejsce na przycisk */
+.overlay img {
+  width: 100%;
+  height: calc(100vh - 80px);
+  object-fit: contain;
+  display: block;
+}
+
+/* pasek na dole z przyciskiem */
+.overlay-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px;
+  background: rgba(0,0,0,0.85);
+}
+
+/* przycisk */
+.overlay-footer .back-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  font-weight: 900;
+  letter-spacing: 0.3px;
+
+  background: linear-gradient(#ffcc33, #c59d00);
+  color: #111;
+}
+
     .center {
       text-align: center;
     }
@@ -85,14 +131,12 @@
 
   <!-- Fullscreen kotek -->
 <div id="kotekOverlay" class="overlay" aria-hidden="true">
-  <img src="kotek.jpg" alt="Kotek">
+  <img src="zadanie1.png.png" alt="Kotek">
 
   <div class="overlay-footer">
-    <a href="index.html" class="back-btn">
-      ⬅️ WRÓĆ do strony głównej
-    </a>
+    <a href="index.html" class="back-btn">WRÓĆ</a>
   </div>
-</div>
+</div>  
 
 
   <script>
