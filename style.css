@@ -1,388 +1,92 @@
-/* FONTY */
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&display=swap');
+/* ==========================================
+   MISJA RATUNKOWA: OGRÓD (UI: LAB / ENERGY)
+   Kompletny style.css – wklej całość
+   ========================================== */
+
+/* ---- Reset i zmienne ---- */
+:root {
+  --bg: #0b0f14;
+  --panel: rgba(18, 24, 30, 0.86);
+  --panel-2: rgba(22, 29, 36, 0.92);
+
+  --text: #e7edf3;
+  --muted: #b9c3cc;
+
+  --border: #3a4650;
+  --border-2: #4a5a66;
+
+  --warning: #ffcc33;
+  --warning-2: #c59d00;
+
+  --energy: #4de3ff;
+  --ok: #33d17a;
+  --danger: #ff5c5c;
+
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  --scorebar-h: 72px; /* używane do odsunięcia treści pod sticky bar */
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 
 body {
   margin: 0;
-  padding: 0;
-  background: radial-gradient(circle at top, #3a2f25, #1e1510);
-  font-family: 'Cinzel', serif;
-  color: #2b1b0f;
-}
-* {
-  box-sizing: border-box;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+
+  /* TŁO – wrzuć obraz jako bg_lab.jpg do folderu projektu */
+  background-image:
+    radial-gradient(ellipse at center, rgba(77, 227, 255, 0.10), rgba(0,0,0,0) 55%),
+    url("bg_lab.png.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  min-height: 100vh;
 }
 
-/* GŁÓWNY KONTENER – PERGAMIN */
+/* ---- Główny panel ---- */
 .container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 30px;
-  background: linear-gradient(#f5e6c8, #e8d4aa);
-  border: 10px solid #6b4a2d;
-  border-radius: 12px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  width: 100%;
+  max-width: 560px;
+  margin: 16px auto;
+  padding: 18px;
+
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+
+  backdrop-filter: blur(6px);
 }
 
-/* TYTUŁ */
+/* ---- Tytuły ---- */
 .title {
+  margin: 6px 0 6px;
   text-align: center;
-  font-family: 'MedievalSharp', cursive;
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+
+  color: var(--warning);
+  text-shadow: 0 0 10px rgba(255, 204, 51, 0.25);
 }
 
 .subtitle {
+  margin: 0 0 14px;
   text-align: center;
-  font-style: italic;
-  margin-bottom: 30px;
+  font-size: 0.95rem;
+  color: var(--muted);
 }
 
-/* ZADANIE */
-.task {
-  background: rgba(255, 255, 255, 0.5);
-  border: 2px solid #8b5a2b;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.task:hover {
-  transform: scale(1.01);
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-}
-
-.task.done {
-  background: linear-gradient(#d9f2d9, #bfe6bf);
-  border-color: #2f6b2f;
-}
-
-/* NAGŁÓWEK ZADANIA */
-.task h3 {
-  margin-top: 0;
-  font-family: 'MedievalSharp', cursive;
-}
-
-/* INPUT */
-input {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #6b4a2d;
-  border-radius: 6px;
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  background: #fff8e8;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
-
-}
-.score {
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 25px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.1);
-  border: 2px solid #6b4a2d;
-  border-radius: 8px;
-}
-.reset-section {
-  margin-top: 40px;
-  text-align: center;
-}
-
-#qrResetBtn {
-  padding: 12px 20px;
-  font-family: 'Cinzel', serif;
-  font-size: 1rem;
-  background: linear-gradient(#7a2e2e, #4a1515);
-  color: #ffe6c7;
-  border: 2px solid #2a0d0d;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-#qrResetBtn:hover {
-  background: linear-gradient(#9a3a3a, #5a1d1d);
-}
-
-/* PRZYCISK */
-button {
-  width: 100%;
-  margin-top: 8px;
-  padding: 10px;
-  font-family: 'Cinzel', serif;
-  font-weight: bold;
-  font-size: 1rem;
-  background: linear-gradient(#8b5a2b, #5a3a1b);
-  color: #fff2cc;
-  border: 2px solid #3a2412;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button:hover {
-  background: linear-gradient(#a66a34, #6b4320);
-}
-
-button:disabled {
-  background: #999;
-  cursor: not-allowed;
-}
-
-/* ODPOWIEDŹ */
-.answer {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .container {
-    margin: 10px;
-    padding: 20px;
-  }
-
-  .title {
-    font-size: 1.8rem;
-  }
-}
-.qr-btn {
-  display: block;
-  text-align: center;
-  margin-bottom: 10px;
-  padding: 10px;
-  font-family: 'Cinzel', serif;
-  font-weight: bold;
-  text-decoration: none;
-  color: #ffe6c7;
-  background: linear-gradient(#3b5a2b, #243a1b);
-  border: 2px solid #1a2a12;
-  border-radius: 8px;
-}
-
-.overlay {
-  position: fixed;
-  inset: 0;
-  display: none;
-  background: #000;
-  z-index: 9999;
-}
-
-.overlay.active {
-  display: block;
-}
-
-/* Zarezerwuj miejsce na pasek na dole */
-.overlay img {
-  width: 100%;
-  height: calc(100vh - 78px); /* 78px = wysokość paska z przyciskiem */
-  object-fit: contain;
-  display: block;
-}
-
-.overlay-footer {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.85);
-}
-
-.back-btn {
-  display: block;
-  text-align: center;
-  padding: 12px;
-  font-family: 'Cinzel', serif;
-  font-weight: bold;
-  text-decoration: none;
-  color: #ffe6c7;
-  background: linear-gradient(#7a2e2e, #4a1515);
-  border: 2px solid #2a0d0d;
-  border-radius: 8px;
-}
-
-.back-btn:hover {
-  background: linear-gradient(#9a3a3a, #5a1d1d);
-}
-/* ===== KARTA ZADANIA ===== */
-
-.task {
-  background: linear-gradient(#f7ecd2, #e6d2a6);
-  border: 3px solid #6b4a2d;
-  border-radius: 14px;
-  padding: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  position: relative;
-}
-
-.task.done {
-  background: linear-gradient(#d9f2d9, #bfe6bf);
-  border-color: #2f6b2f;
-}
-
-/* ===== HEADER Z IKONĄ ===== */
-
-.task-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12px;
-  gap: 12px;
-}
-
-.task-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: #3a2412;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #1f1208;
-
-  overflow: hidden; /* 🔑 KLUCZOWE */
-}
-
-
-.task-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;   /* 🔑 wypełnia koło */
-  border-radius: 50%;  /* 🔒 dodatkowe zabezpieczenie */
-}
-
-
-.task-title {
-  display: flex;
-  flex-direction: column;
-}
-
-.task-number {
-  font-family: 'MedievalSharp', cursive;
-  font-size: 1.2rem;
-}
-
-.task-points {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-/* =========================
-   MOBILE FIRST (telefony)
-   ========================= */
-@media (max-width: 600px) {
-
-  /* usuń "czarne boki": tło i pełna szerokość */
-  body {
-    background: linear-gradient(#f5e6c8, #e8d4aa);
-    padding: 0;
-  }
-
-  .container {
-    max-width: none;
-    margin: 0;
-    padding: 14px;
-    border-radius: 0;
-    border-width: 6px;
-    box-shadow: none;
-    min-height: 100vh;
-  }
-
-  /* większy tytuł i licznik - lepsza czytelność */
-  .title {
-    font-size: 2.0rem;
-    margin-top: 6px;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-    margin-bottom: 14px;
-  }
-
-  .score {
-    font-size: 1.25rem;
-    padding: 12px;
-    margin-bottom: 18px;
-  }
-
-  /* KARTY zadań: większe, żeby było 1–2 na ekran */
-  .task {
-    padding: 18px;
-    margin-bottom: 18px;
-    border-width: 3px;
-    border-radius: 16px;
-  }
-
-  .task-header {
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  /* większa ikona - "aplikacyjny" look */
-  .task-icon {
-    width: 72px;
-    height: 72px;
-  }
-
-  .task-number {
-    font-size: 1.35rem;
-  }
-
-  .task-points {
-    font-size: 1rem;
-  }
-
-  /* większe pola i przyciski (thumb-friendly) */
-  input {
-    font-size: 1.1rem;
-    padding: 14px;
-    border-radius: 10px;
-  }
-
-  button {
-    font-size: 1.1rem;
-    padding: 14px;
-    border-radius: 10px;
-  }
-
-  .qr-btn {
-    font-size: 1.05rem;
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-  }
-
-  .answer {
-    font-size: 1.05rem;
-    margin-top: 12px;
-  }
-
-  /* reset na dole: większy i bez odstających marginesów */
-  .reset-section {
-    margin-top: 20px;
-    padding: 0 14px 18px;
-  }
-
-  #qrResetBtn {
-    width: 100%;
-    padding: 14px;
-    font-size: 1.05rem;
-    border-radius: 10px;
-  }
-}
-@media (max-width: 600px) {
-  html, body {
-    scroll-snap-type: none;
-  }
-
-  .task {
-    scroll-snap-align: none;
-  }
-}
-/* =========================
-   STICKY SCORE BAR (mobile)
-   ========================= */
-
+/* ---- Sticky pasek punktów (status energii) ---- */
 .score-bar {
   position: sticky;
   top: 0;
@@ -392,22 +96,443 @@ button:disabled {
   justify-content: space-between;
   align-items: center;
 
-  padding: 14px 16px;
-  margin-bottom: 16px;
+  padding: 12px 14px;
+  margin: 14px 0 16px;
 
-  background: linear-gradient(#3a2412, #1f1208);
-  color: #ffe6c7;
+  background: linear-gradient(90deg, rgba(18,24,30,0.98), rgba(26,34,42,0.98));
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
 
-  border-bottom: 3px solid #b08a57;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.45),
+    inset 0 0 10px rgba(255,255,255,0.04);
 }
 
 .score-label {
-  font-family: 'MedievalSharp', cursive;
-  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: var(--text);
+  opacity: 0.95;
 }
 
 .score-value {
-  font-size: 1.6rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--energy);
+  text-shadow: 0 0 10px rgba(77,227,255,0.55);
+}
+
+/* Zapobiega chowaniu elementów pod sticky bar (np. przy anchorach) */
+html { scroll-padding-top: var(--scorebar-h); }
+
+/* ---- Lista zadań ---- */
+#tasks {
+  padding-top: 4px;
+}
+
+/* ---- Karta zadania ---- */
+.task {
+  background: linear-gradient(180deg, rgba(25,32,40,0.92), rgba(14,18,23,0.92));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 16px;
+
+  box-shadow:
+    inset 0 0 10px rgba(255,255,255,0.03),
+    var(--shadow-soft);
+
+  position: relative;
+}
+
+/* żeby task nie chował się pod sticky bar podczas ewentualnych skoków */
+.task { scroll-margin-top: calc(var(--scorebar-h) + 10px); }
+
+.task.done {
+  border-color: rgba(51, 209, 122, 0.75);
+  box-shadow:
+    0 0 14px rgba(51, 209, 122, 0.18),
+    inset 0 0 10px rgba(255,255,255,0.03);
+}
+
+/* ---- Header zadania (ikona + numer + punkty) ---- */
+.task-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.task-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  background: rgba(10, 14, 18, 0.9);
+  border: 2px solid rgba(255, 204, 51, 0.35);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    inset 0 0 10px rgba(255,255,255,0.04),
+    0 4px 12px rgba(0,0,0,0.35);
+}
+
+.task-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.task-title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.task-number {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+}
+
+.task-points {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ---- Przycisk QR (test) ---- */
+.qr-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+
+  margin: 8px 0 10px;
+  padding: 12px;
+
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 204, 51, 0.35);
+
+  background: linear-gradient(180deg, rgba(255,204,51,0.95), rgba(197,157,0,0.95));
+  color: #111;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.qr-btn:hover {
+  filter: brightness(1.05);
+}
+
+/* ---- Pole wpisywania kodu + przyciski ---- */
+input {
+  width: 100%;
+  padding: 12px 12px;
+
+  background: rgba(9, 12, 16, 0.92);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+
+  color: var(--energy);
+  font-size: 1rem;
+  outline: none;
+
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.45);
+}
+
+input::placeholder {
+  color: rgba(185, 195, 204, 0.75);
+}
+
+input:focus {
+  border-color: rgba(77, 227, 255, 0.55);
+  box-shadow:
+    0 0 0 3px rgba(77,227,255,0.12),
+    inset 0 0 10px rgba(0,0,0,0.45);
+}
+
+button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+
+  border: 0;
+  border-radius: var(--radius-sm);
+
+  background: linear-gradient(180deg, rgba(255,204,51,0.95), rgba(197,157,0,0.95));
+  color: #111;
+
+  font-weight: 900;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+button:disabled,
+input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---- Feedback ---- */
+.answer {
+  margin-top: 12px;
+  padding: 10px 12px;
+
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(77, 227, 255, 0.25);
+
+  background: rgba(10, 14, 18, 0.75);
+  color: var(--text);
+
+  font-weight: 650;
+}
+
+/* ---- Sekcja resetu (symulacja QR) ---- */
+.reset-section {
+  max-width: 560px;
+  margin: 0 auto 18px;
+  padding: 0 18px 18px;
+}
+
+#qrResetBtn {
+  width: 100%;
+  padding: 12px;
+
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 92, 92, 0.35);
+
+  background: linear-gradient(180deg, rgba(255,92,92,0.95), rgba(170,40,40,0.95));
+  color: #111;
+
+  font-weight: 900;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+#qrResetBtn:hover {
+  filter: brightness(1.05);
+}
+
+/* ---- Przyciski powrotu na podstronach (użyteczne globalnie) ---- */
+.back-btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+
+  padding: 12px;
+  margin-top: 18px;
+
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 204, 51, 0.25);
+
+  background: linear-gradient(180deg, rgba(22,29,36,0.92), rgba(12,16,20,0.92));
+  color: var(--text);
+
+  font-weight: 800;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.back-btn:hover {
+  border-color: rgba(77, 227, 255, 0.35);
+}
+
+/* ==========================================
+   MOBILE – większe elementy, “apka”
+   ========================================== */
+@media (max-width: 600px) {
+  body {
+    /* na mobile lepiej bez fixed (czasem laguje) */
+    background-attachment: scroll;
+  }
+
+  .container {
+    max-width: none;
+    margin: 0;
+    min-height: 100vh;
+
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 1.55rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .score-bar {
+    /* edge-to-edge look na telefonie */
+    margin-left: -16px;
+    margin-right: -16px;
+    border-radius: 0;
+  }
+
+  .task {
+    padding: 18px;
+    border-radius: 16px;
+  }
+
+  .task-icon {
+    width: 74px;
+    height: 74px;
+  }
+
+  input, button {
+    padding: 14px;
+    font-size: 1.05rem;
+  }
+
+  .qr-btn {
+    padding: 13px;
+    font-size: 1.02rem;
+  }
+}
+/* =========================
+   STABILIZACJA SYSTEMU (sticky)
+   ========================= */
+
+.stability-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  padding: 12px 14px;
+  margin: 14px 0 16px;
+
+  background: linear-gradient(90deg, rgba(18,24,30,0.98), rgba(26,34,42,0.98));
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.45),
+    inset 0 0 10px rgba(255,255,255,0.04);
+}
+
+.stability-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stability-label {
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--text);
+}
+
+.stability-value {
+  font-weight: 900;
+  color: var(--energy);
+  text-shadow: 0 0 10px rgba(77,227,255,0.55);
+  font-size: 1.1rem;
+}
+
+.stability-track {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.stability-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(77,227,255,0.95), rgba(51,209,122,0.95));
+  box-shadow: 0 0 14px rgba(77,227,255,0.35);
+  transition: width 280ms ease;
+}
+
+/* =========================
+   MIGANIE ZADAŃ NIENAPRAWIONYCH
+   ========================= */
+
+/* subtelny „alarm” dla tasków, które nie są .done */
+.task:not(.done) {
+  animation: taskAlarm 1.6s infinite;
+}
+
+/* jeśli wolisz mocniej, skróć czas do 1.1s */
+@keyframes taskAlarm {
+  0% {
+    box-shadow:
+      inset 0 0 10px rgba(255,255,255,0.03),
+      0 6px 16px rgba(0,0,0,0.35);
+    border-color: var(--border);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 10px rgba(255,255,255,0.03),
+      0 0 18px rgba(255, 204, 51, 0.20);
+    border-color: rgba(255, 204, 51, 0.55);
+  }
+  100% {
+    box-shadow:
+      inset 0 0 10px rgba(255,255,255,0.03),
+      0 6px 16px rgba(0,0,0,0.35);
+    border-color: var(--border);
+  }
+}
+
+/* MOBILE: pasek edge-to-edge jak app bar */
+@media (max-width: 600px) {
+  .stability-bar {
+    margin-left: -16px;
+    margin-right: -16px;
+    border-radius: 0;
+  }
+}
+/* =========================
+   KOLORY STABILIZACJI SYSTEMU
+   ========================= */
+
+.stability-fill.low {
+  background: linear-gradient(90deg, #ff4b4b, #b32020);
+  box-shadow: 0 0 12px rgba(255,75,75,0.6);
+}
+
+.stability-fill.medium {
+  background: linear-gradient(90deg, #ffd84d, #c59d00);
+  box-shadow: 0 0 12px rgba(255,216,77,0.6);
+}
+
+.stability-fill.high {
+  background: linear-gradient(90deg, #33d17a, #1f9e57);
+  box-shadow: 0 0 12px rgba(51,209,122,0.6);
+}
+
+/* FORCE: kolory stabilizacji (pewne nadpisanie) */
+#stabilityFill.low {
+  background: linear-gradient(90deg, #ff4b4b, #b32020) !important;
+  box-shadow: 0 0 12px rgba(255,75,75,0.6) !important;
+}
+
+#stabilityFill.medium {
+  background: linear-gradient(90deg, #ffd84d, #c59d00) !important;
+  box-shadow: 0 0 12px rgba(255,216,77,0.6) !important;
+}
+
+#stabilityFill.high {
+  background: linear-gradient(90deg, #33d17a, #1f9e57) !important;
+  box-shadow: 0 0 12px rgba(51,209,122,0.6) !important;
 }
