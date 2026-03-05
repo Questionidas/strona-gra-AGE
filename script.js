@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-
+ 
   /* =========================
      KONFIGURACJA ZADAŃ
   ========================== */
@@ -21,6 +21,37 @@ document.addEventListener("DOMContentLoaded", () => {
      FUNKCJE PUNKTÓW
      (JEDYNE ŹRÓDŁO PRAWDY)
   ========================== */
+function updateStability() {
+
+  if (!Array.isArray(tasksData)) return;
+
+  const percentEl = document.getElementById("stabilityPercent");
+  const fillEl = document.getElementById("stabilityFill");
+
+  if (!percentEl || !fillEl) return;
+
+  const totalTasks = tasksData.length;
+  let doneTasks = 0;
+
+  for (const task of tasksData) {
+    if (localStorage.getItem(`task_${task.id}`) === "done") {
+      doneTasks++;
+    }
+  }
+
+  const percent = Math.round((doneTasks / totalTasks) * 100);
+
+  percentEl.textContent = percent;
+  fillEl.style.width = percent + "%";
+
+  fillEl.classList.remove("low","medium","high");
+
+  if (percent < 30) fillEl.classList.add("low");
+  else if (percent < 70) fillEl.classList.add("medium");
+  else fillEl.classList.add("high");
+
+}
+  
 
   function getPoints() {
     return parseInt(localStorage.getItem("totalPoints")) || 0;
@@ -33,7 +64,22 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreValue.textContent = value;
     }
   }
+function updateStability() {
+  const total = tasksData.length;
+  let done = 0;
 
+  for (const t of tasksData) {
+    if (localStorage.getItem(`task_${t.id}`) === "done") done++;
+  }
+
+  const percent = Math.round((done / total) * 100);
+
+  const percentEl = document.getElementById("stabilityPercent");
+  const fillEl = document.getElementById("stabilityFill");
+
+  if (percentEl) percentEl.textContent = percent;
+  if (fillEl) fillEl.style.width = `${percent}%`;
+}
   function addPoints(amount) {
     setPoints(getPoints() + amount);
   }
@@ -64,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
  taskDiv.innerHTML = `
   <div class="task-header">
     <div class="task-icon">
-      <img src="task${task.id}.png" alt="Symbol zadania ${task.id}">
+      <img src="icons/task${task.id}.png" alt="Symbol zadania ${task.id}">
     </div>
     <div class="task-title">
       <span class="task-number">Zadanie ${task.id}</span>
@@ -74,22 +120,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   ${
     task.id === 1
-      ? `<a href="zadanie1.html" class="qr-btn">📷 Zeskanuj QR (test)</a>`
+      ? `<a href="zadanie1.html" class="qr-btn"> Zeskanuj QR (test)</a>`
       : task.id === 4
-        ? `<a href="zadanie4.html" class="qr-btn">📷 Zeskanuj QR (test)</a>`
+        ? `<a href="zadanie4.html" class="qr-btn"> Zeskanuj QR (test)</a>`
         : task.id === 7
-          ? `<a href="zadanie7.html" class="qr-btn">📷 Zeskanuj QR (test)</a>`
+          ? `<a href="zadanie7.html" class="qr-btn"> Zeskanuj QR (test)</a>`
           : task.id === 8
-            ? `<a href="zadanie8.html" class="qr-btn">📷 Zeskanuj QR (test)</a>`
+            ? `<a href="zadanie8.html" class="qr-btn"> Zeskanuj QR (test)</a>`
             : task.id === 9
-              ? `<a href="zadanie9.html" class="qr-btn">📷 Zeskanuj QR (test)</a>`
+              ? `<a href="zadanie9.html" class="qr-btn"> Zeskanuj QR (test)</a>`
               : ""
   }
 
   <input type="text" placeholder="Wpisz kod" ${isDone ? "disabled" : ""}>
   <button ${isDone ? "disabled" : ""}>Sprawdź</button>
 
-  <div class="answer">${isDone ? "✅ Zadanie wykonane" : ""}</div>
+  <div class="answer">${isDone ? " Zadanie wykonane" : ""}</div>
 `;
 
 
@@ -109,7 +155,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         taskDiv.classList.add("done");
-        answerDiv.textContent = `🏆 Zdobywasz ${task.points} punktów!`;
+        answerDiv.textContent = ` Naprawiłeś system o 10%!`;
+        updateStability();
 
         input.disabled = true;
         button.disabled = true;
@@ -132,10 +179,9 @@ document.addEventListener("DOMContentLoaded", () => {
     qrResetBtn.addEventListener("click", () => {
       if (confirm("Czy na pewno chcesz wydać wszystkie punkty?")) {
         setPoints(0);
-        alert("🪙 Złoto zostało wydane. Sakiewka jest pusta.");
+        alert(" Złoto zostało wydane. Sakiewka jest pusta.");
       }
     });
   }
-
+ updateStability();
 });
-
